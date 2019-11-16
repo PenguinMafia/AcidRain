@@ -14,7 +14,9 @@ mmap['SQUAW VALLEY G.C., CA US'] = [39.1963, -120.2336, 2447.2]
 
 print(mmap)
 
-def 
+def days_in_month(numb_month):
+    list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    return list[numb_month - 1]
 
 def to_lat(ray):
     lst = []
@@ -30,22 +32,26 @@ def to_long(ray):
         lst.append(mmap[location][1])
     return np.array(lst)
 
+
 def parse_year(ray):
     lst = []
     for date in ray:
         date_split = re.split('/', date)
-        lst.append(date_split[2])
+        lst.append(int(date_split[2]))
+    return np.array(lst)
+
 
 def parse_month_day(ray):
     lst = []
     for date in ray:
         date_split = re.split('/', date)
-        number = date_split[0] + (date_split[1] - 1) / days_in_month(date_split[0])
-        lst.append()
+        number = int(date_split[0]) + (int(date_split[1]) - 1) / days_in_month(int(date_split[0]))
+        lst.append(number)
+    return np.array(lst)
 
 
 df = pd.read_csv('1946944.csv')
-df = df[['STATION', 'NAME', 'DATE', 'PRCP', 'LAT', 'LONG']]
+df = df[['STATION', 'NAME', 'DATE', 'PRCP']]
 df = df.dropna(subset=['PRCP'])
 df = df.reset_index(drop=True)
 
@@ -53,7 +59,6 @@ df['LAT'] = to_lat(np.array(df['NAME']))
 df['LONG'] = to_long(np.array(df['NAME']))
 
 df['YEAR'] = parse_year(np.array(df['DATE']))
-df['MONTH'] = parse_month(np.array(df['MONTH']))
-df['DAY'] = parse_day(np.array(df['DAY']))
+df['MONTH'] = parse_month_day(np.array(df['DATE']))
 
 df.to_csv(r'clean_data.csv')
