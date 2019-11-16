@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import re
 
 mmap = {}
 
@@ -12,6 +13,8 @@ mmap['O C FISHER DAM, TX US'] = [31.4833314, -100.4833314, ]
 mmap['SQUAW VALLEY G.C., CA US'] = [39.1963, -120.2336, 2447.2]
 
 print(mmap)
+
+def 
 
 def to_lat(ray):
     lst = []
@@ -26,6 +29,19 @@ def to_long(ray):
     for location in ray:
         lst.append(mmap[location][1])
     return np.array(lst)
+
+def parse_year(ray):
+    lst = []
+    for date in ray:
+        date_split = re.split('/', date)
+        lst.append(date_split[2])
+
+def parse_month_day(ray):
+    lst = []
+    for date in ray:
+        date_split = re.split('/', date)
+        number = date_split[0] + (date_split[1] - 1) / days_in_month(date_split[0])
+        lst.append()
 
 
 df = pd.read_csv('1946944.csv')
