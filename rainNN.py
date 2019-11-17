@@ -7,7 +7,7 @@ import seaborn as sns
 import os
 import pandas as pd
 import pprint as pp
-
+from sklearn.model_selection import train_test_split
 
 # load dataset
 path = os.getcwd()
@@ -22,18 +22,15 @@ for filename in os.listdir(path):
     raw_data = pd.read_csv(path+'/'+filename, names=column_names, na_values="?", comment= "\t", sep=",",
                            skipinitialspace=True)
     data = raw_data.copy()
-    data = data.dropna()
-    data = data.drop(0)
-    data = data.drop('STATION', axis=1)
-    data = data.drop('NAME', axis=1)
+    data = data.drop(columns=['STATION', 'NAME'])
     # after processing
     data3 = pd.concat([data3, data])
 pp.pprint(data3)
-print(data3.shape)
 
-train_dataset = data3.sample(frac=0.8,random_state=0)
-test_dataset = data3.drop(train_dataset.index)
+# This requires scikit-learn. Get it Bill.
+train_dataset, test_dataset = train_test_split(data3, train_size=0.8)
 
+'''
 sns.pairplot(train_dataset[['LATITUDE', 'LONGITUDE', 'PRECIPITATION']], diag_kind="kde")
 plt.show()
 
@@ -43,21 +40,22 @@ train_stats = train_stats.transpose()
 
 train_labels = train_dataset.pop('PRECIPITATION')
 test_labels = test_dataset.pop('PRECIPITATION')
-
+'''
 
 def norm(x):
     # return (x - train_stats['mean']) / train_stats['std']
     return x
 
 
-normed_train_data = norm(train_dataset)
-normed_test_data = norm(test_dataset)
-
+train_X = train_dataset[['LATITUDE', 'LONGITUDE', 'ELEVATION', 'MONTH', 'YEAR']]
+train_Y = train_dataset['PRECIPITATION']
+test_X = test_dataset[['LATITUDE', 'LONGITUDE', 'ELEVATION', 'MONTH', 'YEAR']]
+test_Y = test_dataset['PRECIPITATION']
 
 # load model
 def build_model():
     model = keras.Sequential()
-    model.add(keras.layers.Dense(64, input_shape=[4]))
+    model.add(keras.layers.Dense(64, input_shape=[5]))
     model.add(keras.layers.Dense(1024, activation=tf.nn.sigmoid))
     model.add(keras.layers.Dense(1024, activation=tf.nn.sigmoid))
     model.add(keras.layers.Dense(1, activation=tf.nn.relu))
@@ -70,11 +68,17 @@ def build_model():
 model = build_model()
 model.summary()
 
-example_batch = normed_train_data[:10]
+example_batch = train_X[:10]
+print(example_batch)
 example_result = model.predict(example_batch)
 print(example_result)
 
 #train
+history = model.fit(train_X,
+                    train_Y,
+                    batch_size=64,
+                    epochs=50)
 
+model.save('our_model_cue_USSR_theme.h5')
 
 #test
