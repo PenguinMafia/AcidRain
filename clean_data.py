@@ -46,19 +46,21 @@ def to_long(ray):
     return np.array(lst)
 
 
-def parse_year(ray):
-    lst = []
-    for date in ray:
+def parse_year_month_day(ray):
+    lst1 = []
+    lst2 = []
+    for date in ray.copy():
         date_split = re.split('-', date)
-        lst.append(int(date_split[0]))
-    return np.array(lst)
-
-
-def parse_month_day(ray):
-    lst = []
-    for date in ray:
-        date_split = re.split('-', date)
+        lst1.append(int(date_split[0]))
         number = int(date_split[1]) + (int(date_split[2]) - 1) / days_in_month(int(date_split[1]))
+        lst2.append(number)
+    return np.array(lst1), np.array(lst2)
+
+
+def parse_rain(ray):
+    lst = []
+    for x in ray:
+        lst.append(1 if x > 0 else 0)
     return np.array(lst)
 
 
@@ -77,11 +79,21 @@ df = df.reset_index(drop=True)
 df['LATITUDE'] = to_lat(np.array(df['NAME']))
 df['LONGITUDE'] = to_long(np.array(df['NAME']))
 
-df['YEAR'] = parse_year(np.array(df['DATE']))
-df['MONTH'] = parse_month_day(np.array(df['DATE']))
+df['YEAR'], df['MONTH'] = parse_year_month_day(np.array(df['DATE']))
 df['ELEVATION'] = get_elevation(np.array(df['NAME']))
-df['PRECIPITATION'] = df['PRCP']
+df['PRECIPITATION'] = np.array(df['PRCP'])
 
 df = df[['STATION', 'NAME', 'LATITUDE', 'LONGITUDE', 'ELEVATION', 'MONTH', 'YEAR', 'PRECIPITATION']]
+
+# Now you gotta drop some of the zeros you find
+every_ten = 0
+for idx in df.index:
+    if df.loc[idx]['PRECIPITATION'] == 0:
+        every_ten = every_ten + 1
+        if every_ten == 3:
+            every_ten = 0
+            df = df.drop(idx)
+
+df.reset_index(drop=True)
 
 df.to_csv(r'clean_data3.csv')

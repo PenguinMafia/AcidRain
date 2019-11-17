@@ -55,10 +55,16 @@ test_Y = test_dataset['PRECIPITATION']
 # load model
 def build_model():
     model = keras.Sequential()
+    '''
     model.add(keras.layers.Dense(64, input_shape=[5]))
     model.add(keras.layers.Dense(1024, activation=tf.nn.sigmoid))
     model.add(keras.layers.Dense(1024, activation=tf.nn.sigmoid))
     model.add(keras.layers.Dense(1, activation=tf.nn.relu))
+    '''
+    model.add(tf.keras.layers.Embedding(64, input_shape=[5]))
+    model.add(tf.keras.layers.LSTM(1024))
+    model.add(tf.keras.layers.LSTM(1024))
+    model.add(tf.keras.layers.Dense(1, activation=tf.nn.relu))
 
     optimizer = tf.optimizers.RMSprop(0.001)
     model.compile(loss='mse', optimizer=optimizer, metrics=['mae', 'mse'])
