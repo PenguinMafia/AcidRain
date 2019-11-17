@@ -9,6 +9,7 @@ import pandas as pd
 import pprint as pp
 from sklearn.model_selection import train_test_split
 
+
 # load dataset
 path = os.getcwd()
 print(path)
@@ -42,12 +43,12 @@ train_stats = train_stats.transpose()
 
 train_labels = train_dataset.pop('PRECIPITATION')
 test_labels = test_dataset.pop('PRECIPITATION')
-'''
+
 
 def norm(x):
     # return (x - train_stats['mean']) / train_stats['std']
     return x
-
+'''
 
 train_X = train_dataset[['LATITUDE', 'LONGITUDE', 'ELEVATION', 'MONTH', 'YEAR']]
 train_Y = train_dataset['PRECIPITATION']
@@ -72,7 +73,7 @@ def build_model():
     model.add(keras.layers.Dense(1, activation=tf.nn.relu))
 
     optimizer = tf.optimizers.RMSprop(0.001)
-    model.compile(loss='mse', optimizer=optimizer, metrics=['mae', 'mse'])
+    model.compile(loss='mse', optimizer=optimizer, metrics=['mae', 'mse', 'accuracy'])
     return model
 
 
@@ -113,13 +114,6 @@ history = model.fit(train_X,
 
 
 model.save('AcidRainModel.h5')
-'''for x in range(23):
-    model = keras.model.load_module('our_module_cue_USSR_them.h5')
-    history = model.fit(train_X,
-                        train_Y,
-                        batch_size=64,
-                        epochs=5)
 
-    model.save('our_model_cue_USSR_theme.h5')'''
 
 #test
