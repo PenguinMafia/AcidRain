@@ -90,11 +90,9 @@ callbacks = myCallback()
 history = model.fit(train_X,
                     train_Y,
                     batch_size=64,
-                    epochs=50,
-                    callbacks=[callbacks])
+                    epochs=60)
 
 
-print(model.predict([39,-120, 2447.2, 10.7, 200]))
 
 
 
