@@ -14,5 +14,11 @@ def load_and_compute(lat, long, alt, month, year):
     model = tf.keras.models.load_model(filename)
     result = model.predict(input)
     print(result)
+    return result
 
 load_and_compute(32.1145231,-110.6911934,929.6,12.80645161,1951)
+
+write_to_file = open("predict.txt", "w+")
+write_to_file.write('var result = ')
+write_to_file.write(str(load_and_compute(32.1145231,-110.6911934,929.6,12.80645161,1951)[0][0][0]))
+write_to_file.close()
