@@ -16,7 +16,7 @@ def visualize_colors(cluster, centroids):
     for (percent, color) in colors:
         print(color, "{:0.2f}%".format(percent * 100))
         end = start + (percent * 300)
-        cv2.rectangle(rect, (int(start), 0), (int(end), 50), \
+        cv2.rectangle(rect, (int(start), 0), (int(end), 50),
                       color.astype("uint8").tolist(), -1)
         start = end
     return rect
