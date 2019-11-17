@@ -12,8 +12,6 @@ mmap['N LAZY H RANCH, AZ US'] = [32.1145231, -110.6911934]
 mmap['O C FISHER DAM, TX US'] = [31.4833314, -100.4833314, ]
 mmap['SQUAW VALLEY G.C., CA US'] = [39.1963, -120.2336, 2447.2]
 
-print(mmap)
-
 def days_in_month(numb_month):
     list = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     return list[numb_month - 1]
@@ -22,7 +20,6 @@ def to_lat(ray):
     lst = []
     for location in ray:
         lst.append(mmap[location][0])
-    print(lst)
     return np.array(lst)
 
 
