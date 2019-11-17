@@ -26,7 +26,7 @@ def load_and_compute(lat, long, alt, month, year):
     input = np.reshape(input, (input.shape[0], 1, input.shape[1]))
 
     #load
-    filename = 'C:\\Users\\Kitsunebula\\Desktop\\AcidRain\\AcidRainModel.h5'
+    filename = '/var/www/acid/code/Acid/RainAcidRainModel.h5'
     print(filename)
     model = tf.keras.models.load_model(filename)
     result = model.predict(input)
