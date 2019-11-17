@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00ba6515-b623-48ad-b6dc-4703c675c169" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/clean_data3.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AcidRain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AcidRain.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wind_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/wind_data.py" afterDir="false" />
     </list>
@@ -139,6 +137,9 @@
       <module name="AcidRain" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\kevin\Anaconda3\envs\tf\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -175,7 +176,7 @@
       <workItem from="1573934898036" duration="10150000" />
       <workItem from="1573962272127" duration="8701000" />
       <workItem from="1573973320928" duration="22000" />
-      <workItem from="1574001686875" duration="17507000" />
+      <workItem from="1574001686875" duration="18588000" />
     </task>
     <task id="LOCAL-00001" summary="Added a lot of data">
       <created>1573966764259</created>
@@ -205,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574024515101</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added a new api for wind speed and direction">
+      <created>1574027662626</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1574027662626</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +238,8 @@
     <MESSAGE value="Dropped a lot of 0 days of precipitation" />
     <MESSAGE value="Merged with the current version: Eliminated the 0s" />
     <MESSAGE value="Added wind file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added wind file" />
+    <MESSAGE value="Added a new api for wind speed and direction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a new api for wind speed and direction" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AcidRain$clean_data.coverage" NAME="clean_data Coverage Results" MODIFIED="1574025380248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

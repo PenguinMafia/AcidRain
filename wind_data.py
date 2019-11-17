@@ -1,6 +1,6 @@
 import pyowm
 from math import cos, sin, pi
-
+from pprint import pprint
 
 own = pyowm.OWM('15fc8a92ee87b30b3c6ea450210bac94')
 
