@@ -38,7 +38,7 @@ def Zoom(cv2Object, zoomSize):
 # Load image and convert to a list of pixels
 '''LOAD IMAGE FROM SENSOR HERE'''
 '''INSERT PICTURE PATH HERE'''
-image = cv2.imread('C:/Users/Kitsunebula/Desktop/hinh.jpg')
+image = cv2.imread('/var/www/acid/code/AcidRain/image99.jpg')
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 reshape = image.reshape((image.shape[0] * image.shape[1], 3))
 image = Zoom(image, 2)
