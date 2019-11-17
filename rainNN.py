@@ -59,8 +59,10 @@ test_Y = test_dataset['PRECIPITATION']
 test_X = np.array(test_X)
 test_Y = np.array(test_Y)
 
+
 train_X = np.reshape(train_X, (train_X.shape[0], 1, train_X.shape[1]))
 test_X = np.reshape(test_X, (test_X.shape[0], 1, test_X.shape[1]))
+train_Y = np.expand_dims(train_Y, 1)
 
 # load model
 def build_model():
@@ -100,12 +102,14 @@ class myCallback(tf.keras.callbacks.Callback):
 
 callbacks = myCallback()
 
-#train
+train_X = tf.convert_to_tensor(train_X, dtype=tf.float32)
+train_Y = tf.convert_to_tensor(train_Y, dtype=tf.float32)
 
+#train
 history = model.fit(train_X,
                     train_Y,
                     batch_size=64,
-                    epochs=100,
+                    epochs=20,
                     callbacks=[callbacks])
 
 
