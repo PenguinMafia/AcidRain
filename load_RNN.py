@@ -17,12 +17,12 @@ year = 2019
 timeDays = 30
 
 
-coordFinal = wind_data.get_coord(str(Lat), str(Long), time=timeDays)
+#coordFinal = wind_data.get_coord(str(Lat), str(Long), time=timeDays)
 
 
 def load_and_compute(lat, long, alt, month, year):
-    input = [[float(lat), float(long), float(alt), month, year]]
-    input = np.array(input, dtype=tf.float32)
+    input = [[lat, long, alt, month, year]]
+    input = np.array(input)
     input = np.reshape(input, (input.shape[0], 1, input.shape[1]))
 
     #load
@@ -37,5 +37,6 @@ def load_and_compute(lat, long, alt, month, year):
 
 write_to_file = open("predict.txt", "w+")
 write_to_file.write('var result = ')
-write_to_file.write(str(load_and_compute(coordFinal, Alt, month, year)[0][0][0]))
+#write_to_file.write(str(load_and_compute(coordFinal, Alt, month, year)[0][0][0]))
+write_to_file.write(str(load_and_compute(32.1145231,-110.6911934,929.6,12.80645161,1951)[0][0][0]))
 write_to_file.close()
