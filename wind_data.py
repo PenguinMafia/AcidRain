@@ -35,6 +35,8 @@ stations = get(url).json()['items']
 
 
 def closest(lat, long):
+    lat = float(lat)
+    long = float(long)
     dist = 100000
     station_id = -1
     for station in stations:
@@ -45,7 +47,9 @@ def closest(lat, long):
 
 
 def get_wind_components(lat, long):
-    stn_id = closest(lat, long)
+    lat = str(lat)
+    long = str(long)
+    stn_id = str(closest(lat, long))
     url_id = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/' + stn_id
     weather = get(url).json()['items']
     wind_speed = weather['wind_speed']
@@ -54,6 +58,8 @@ def get_wind_components(lat, long):
 
 
 def get_coord(lat, long, time):
+    lat = float(lat)
+    long = float(long)
     wind_x, wind_y = get_wind_components(lat, long)
     long_f = long_hcc + wind_x * (time * 24)
     lat_f = lat_hcc + wind_y * (time * 24)
