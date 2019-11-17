@@ -87,6 +87,7 @@ class myCallback(tf.keras.callbacks.Callback):
 callbacks = myCallback()
 
 #train
+
 history = model.fit(train_X,
                     train_Y,
                     batch_size=64,
@@ -98,5 +99,13 @@ history = model.fit(train_X,
 
 
 model.save('our_model_cue_USSR_theme.h5')
+for x in range(23):
+    model = keras.model.load_module('our_module_cue_USSR_them.h5')
+    history = model.fit(train_X,
+                        train_Y,
+                        batch_size=64,
+                        epochs=2)
+
+    model.save('our_model_cue_USSR_theme.h5')
 
 #test
