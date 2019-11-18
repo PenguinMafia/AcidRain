@@ -2,7 +2,9 @@ import tensorflow as tf
 import numpy as np
 import wind_data
 import os
-os.environ["GOOGLE_API_KEY"] = 'AIzaSyBtF0YdfyMRZyE1Cy5k0WgRDYcTqdBQar4'
+read_from_file = open('api_keys.txt', 'r')
+google_api_key = read_from_file.read().split("\n")[0]
+os.environ["GOOGLE_API_KEY"] = google_api_key
 import geocoder
 
 

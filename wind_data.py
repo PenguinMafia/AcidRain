@@ -1,8 +1,12 @@
 import pyowm
 from math import cos, sin, pi
 from pprint import pprint
+import os
 
-own = pyowm.OWM('15fc8a92ee87b30b3c6ea450210bac94')
+read_from_file = open('api_keys.txt', 'r')
+owm_key = read_from_file.read().split("\n")[1]
+
+own = pyowm.OWM(owm_key)
 
 
 def get_wind_components(lat, long):
